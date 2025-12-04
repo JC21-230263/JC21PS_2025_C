@@ -106,11 +106,11 @@ public class ParticipantListController {
 
             // 遷移先の設定
             mav.setViewName("participantList");
+            return mav;
         } catch (Exception e) {
             mav.setViewName("error");
+            return mav;
         }
-
-        return mav;
 
     }
 

@@ -39,7 +39,9 @@ public class JoinApprovalRepository {
                             ON  j_requ.club_id= club.club_id
 
                         WHERE
-                            j_requ.user_id=?
+                            j_requ.club_id=?
+                       
+                        
                 """;
 
         List<Map<String, Object>> joinApprovalList = jdbcTemplate.queryForList(sql, paramEntity.getClubId());
@@ -90,6 +92,7 @@ public class JoinApprovalRepository {
 
     // insert（承認）
     public void insertRequestInfo(JoinApprovalDataEntity paramEntity) {
+        
         /*
          * TODO ➋ ユーザーを承認するSQL文を完成させる。
          */
@@ -97,17 +100,10 @@ public class JoinApprovalRepository {
                       INSERT INTO
                         trn_club_member(
                             user_id,
-                            club_Id,
-                            leader_flg
-                        )
-                        SELECT 
-                            user_id,
                             club_id,
                             leader_flg
-                        FROM 
-                            trn_join_request
-                        WHERE 
-                            user_id=?
+                        )
+                        VALUES(?,?,?)
                 """;
 
         // entityから値をゲット
@@ -118,6 +114,7 @@ public class JoinApprovalRepository {
         };
 
         jdbcTemplate.update(sqlInsert, paramList);
+        System.out.println("インサート終わり");
     }
 
     // delete（否認）
@@ -130,17 +127,20 @@ public class JoinApprovalRepository {
                         FROM
                             trn_join_request
                         WHERE
+                            club_id=?
+                            AND
                             user_id=?
+                        
                 """;
 
         // entityから値をゲット
         Object[] paramList = {
                 paramEntity.getClubId(),
-                paramEntity.getUserId(),
-                paramEntity.isLeaderFlg()
+                paramEntity.getUserId()
         };
 
         jdbcTemplate.update(sqlDelete, paramList);
+        System.out.println("デリート終わり");
     }
 
 }

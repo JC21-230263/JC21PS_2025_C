@@ -52,11 +52,13 @@ public class JoinRequestService {
             joinRequestSaveEntity.setClubId(paramDto.getClubId());
 
             joinRequestRepository.insertClub(joinRequestSaveEntity);
-
+               
             // 成功のメッセージを返す
             return true;
+            
 
         } catch (Exception e) {
+             System.out.println("エラーーーーーーーーーーーーーーーー");
             // boolean = false の場合
             // 失敗のメッセージを返す
             e.printStackTrace();

@@ -130,11 +130,16 @@ public class JoinRequestController {
              */
             if (result) {
                 // 登録戻り値がTrueの場合
+                // メッセージプロパティファイルから"joinRequestCompleteMessage"を取得
                 String joinRequestCompleteMessage = messageSource.getMessage("joinRequestCompleteMessage", null, Locale.getDefault());
+                // 取得したメッセージをflash属性に追加
                 redirectAttributes.addFlashAttribute("joinOkMessage", joinRequestCompleteMessage);
+                // /joinRequestにリダイレクト
                 mav.setViewName("redirect:/joinRequest");
             } else {
-                // それ以外
+                // それ以外（登録失敗の場合）
+                // エラー画面に遷移
+                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 mav.setViewName("error");
             }
 

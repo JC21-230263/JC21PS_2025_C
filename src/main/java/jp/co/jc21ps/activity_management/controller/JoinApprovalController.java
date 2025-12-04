@@ -169,13 +169,16 @@ public class JoinApprovalController {
              * TODO ➋ ユーザーを承認する際の処理を完成させる。
              */
             joinApprovalService.insertRequestInfo(paramDto);
+
+              System.out.println("デリートが悪い");
             joinApprovalService.deleteRequestInfo(paramDto);
-            
+               System.out.println("デリートが悪くない");
             // insert, deleteに成功した場合、部員登録承認画面に遷移
             mav.addObject("leaderClubId", leaderClubId);
             mav.setViewName("redirect:/joinApproval");
 
         } catch (Exception e) {
+                 System.out.println("コントローラE");
             // insert, deleteに失敗した場合、エラー画面に遷移
             mav.addObject("leaderClubId", leaderClubId);
             mav.setViewName("error");

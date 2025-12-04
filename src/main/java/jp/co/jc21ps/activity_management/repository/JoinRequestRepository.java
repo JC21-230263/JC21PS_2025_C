@@ -73,14 +73,16 @@ public class JoinRequestRepository {
                 INSERT INTO
                     trn_join_request
                     (user_id,
-                     club_id)
-                VALUES (?,?)
+                     club_id,
+                     leader_flg)
+                VALUES (?,?,?)
                 """;
 
         // entityから値をゲットする
         Object[] paramList = {
                 paramEntity.getUserId(),
                 paramEntity.getClubId(),
+                false 
         };
 
         jdbcTemplate.update(sql, paramList);
